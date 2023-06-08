@@ -8,7 +8,7 @@
             <label class="btn btn-outline-primary" for="btnradio2">{{ imgName }}</label>
 
             <ul>
-                <li v-for="file in getFileList" :key="file">
+                <li v-for="file in getFilesFromJson" :key="file">
                     {{ file }}
                 </li>
             </ul>
@@ -17,35 +17,24 @@
 </template>
   
 <script>
-
+import files from "../../assets/file.json";
 export default {
     name: 'charNav',
+    props: ['navType'],
     data() {
         return {
-            imgName: '',
-            assetFiles: []
+            types: String(this.navType).split('_')
         }
     },
-    created() {
-        this.getFileList();
-    },
-    props: ['navType'],
-    
-    methods: {
-        getFileList() {
-            const parsed = String(this.navType).split('_');
-            console.log(parsed);
-            const folderPath = '../../assets/' + parsed[0] + '/' + parsed[1];	// 폴더 경로 값 지정
-
-            console.log(folderPath);
-            // fs.readdir(folder, function (error, filelist) {
-            //     console.log(filelist);
-            // });
-
-            const assetsContext = require.context(String(folderPath), false, /\.(png|jpe?g|gif|svg)$/);
-            this.assetFiles = assetsContext.keys().map(key => key.substring(2));
+    computed:{
+        getFilesFromJson(){
+            return files.map((file)=>{
+                console.log(file.types[0]);
+                return file.types[0].types[1];
+            })
+            
         }
-    }
+    },
 
 
 }
