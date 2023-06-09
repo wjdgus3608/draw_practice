@@ -6,33 +6,39 @@
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio2">{{ imgName }}</label>
-
-            <ul>
+            
+            <!-- <ul>
                 <li v-for="file in getFilesFromJson" :key="file">
                     {{ file }}
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </template>
   
 <script>
-import files from "../../assets/file.json";
 export default {
     name: 'charNav',
     props: ['navType'],
+    created(){
+        this.getFilesFromJson()
+    },
     data() {
         return {
-            types: String(this.navType).split('_')
+            types: String(this.navType).split('_'),
+            fetchFiles: ''
         }
     },
-    computed:{
-        getFilesFromJson(){
-            return files.map((file)=>{
-                console.log(file.types[0]);
-                return file.types[0].types[1];
-            })
-            
+    methods: {
+        getFilesFromJson() {
+            fetch('/file.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         }
     },
 
