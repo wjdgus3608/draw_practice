@@ -7,11 +7,11 @@
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio2">{{ imgName }}</label>
             
-            <!-- <ul>
-                <li v-for="file in getFilesFromJson" :key="file">
+            <ul>
+                <li v-for="file in fetchFiles" :key="file">
                     {{ file }}
                 </li>
-            </ul> -->
+            </ul>
         </div>
     </div>
 </template>
@@ -35,6 +35,7 @@ export default {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
+                    this.fetchFiles = data[this.types[0]+''][this.types[1]+''];
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);

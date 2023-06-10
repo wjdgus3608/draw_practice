@@ -1,7 +1,7 @@
 <template>
     <div class="sub2_1">
        <div class="topContainer">
-            <CharNav navType="2_1"/>
+            <CharNav navType="second_first"/>
        </div>
        <div class="bottomContainer">
         bottom
