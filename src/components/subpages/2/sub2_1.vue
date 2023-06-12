@@ -54,6 +54,8 @@ export default {
   
 <style scoped>
 .sub2_1 {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 
@@ -61,15 +63,19 @@ export default {
 
 .topContainer {
     padding: 10px;
+    width: 900px;
 }
 
 .bottomContainer {
-    height: 100%;
-
+    position: relative;
+    flex-grow: 1;
 }
 
 .imgContainer{
-    position: fixed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>
   
