@@ -19,7 +19,14 @@ export default {
         return {
         }
     },
+    updated(){
+        this.setFirst();
+    },
     methods: {
+        setFirst(){
+            document.getElementById(this.nowChar).className+=' btn-primary';
+            document.getElementById(this.nowChar).className+=' text-primary-emphasis';
+        },
         handleClick(idx,clickedFile) {
             console.log(this.nowChar);
             document.getElementById(this.nowChar).classList.remove('btn-primary');

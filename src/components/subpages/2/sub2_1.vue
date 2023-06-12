@@ -4,9 +4,7 @@
             <CharNav :fetchFiles="fetchFiles" :nowChar="nowChar" :nowIdx="nowIdx" @updateIdx="updateIdx" />
         </div>
         <div class="bottomContainer">
-            bottom
-            {{ this.nowChar }}
-            <img :src=imagePath alt="">
+            <img class="imgContainer" :src=imagePath>
         </div>
     </div>
 </template>
@@ -43,7 +41,8 @@ export default {
                     console.log(data);
                     this.fetchFiles = data[this.types[0] + ''][this.types[1] + ''];
                     this.nowChar = this.fetchFiles[0];
-                    console.log("fetched" + this.fetchFiles);
+                    this.imagePath = this.types[0]+'/'+this.types[1]+'/'+this.nowChar+'.png';
+
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -57,17 +56,20 @@ export default {
 .sub2_1 {
     width: 100%;
     height: 100%;
-    background-color: yellow;
 
 }
 
 .topContainer {
     padding: 10px;
-    background-color: greenyellow;
 }
 
 .bottomContainer {
-    background-color: pink;
+    height: 100%;
+
+}
+
+.imgContainer{
+    position: fixed;
 }
 </style>
   
