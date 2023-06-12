@@ -27,17 +27,14 @@ export default {
             nowIdx: 0,
             types: String('second_first').split('_'),
             fetchFiles: [],
-            imagePath:'@assets/'
+            imagePath:'./'
         }
     },
     methods: {
         updateIdx(c, idx) {
             this.nowIdx = idx;
             this.nowChar = c;
-            console.log(c);
-            this.imagePath = '../../../assets/'+this.types[0]+'/'+this.types[1]+'/'+c+'.png';
-            console.log(this.imagePath);
-            this.imagePath = encodeURIComponent(this.imagePath);
+            this.imagePath = this.types[0]+'/'+this.types[1]+'/'+c+'.png';
         },
         getFilesFromJson() {
             fetch('/file.json')
