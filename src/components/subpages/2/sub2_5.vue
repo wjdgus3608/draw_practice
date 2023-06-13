@@ -103,8 +103,15 @@ export default {
             this.nowChar = [];
             this.parsedChar = [];
             this.charType = '';
+        },
+        spandGaroCharater(element){
+            element.style.width="300px";
+            element.style.height="150px";
+        },
+        spandSaroCharater(element){
+            element.style.width="150px";
+            element.style.height="300px";
         }
-
     }
 }
 </script>
