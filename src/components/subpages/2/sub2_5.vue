@@ -23,6 +23,7 @@ export default {
         CharInputNav
     },
     created() {
+        this.getFilesFromJson();
     },
     data() {
         return {
@@ -69,37 +70,102 @@ export default {
                 });
         },
         generateNowCharImg() {
-            if (this.nowChar.length === 3) {
-                if (this.isUnmo(this.nowChar[1])) {
-                    this.spandGaroCharater(document.getElementById('imgContainer2'));
-                }
-                else {
-                    this.spandSaroCharater(document.getElementById('imgContainer2'));
-                }
-            }
-            // else if(this.nowChar.length===4){
-
-            // }
-            if (this.nowChar.length == 2) {
-                this.imagePath1 = this.types[0] + '/' + this.types[3] + '/' + this.word[this.nowIdx] + '.png';
-            }
-            else {
-                if (this.nowChar.length >= 1) {
-                    this.imagePath1 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[0] + '.png';
-                }
-                if (this.nowChar.length >= 2) {
-                    this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
-                }
-            }
+            this.loadImg();
+            this.adjustImg();
+        },
+        loadImg() {
+            this.loadTwoChar();
 
             if (this.nowChar.length >= 3) {
-                this.imagePath3 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                if(this.isJa(this.nowChar[2]))
+                    this.imagePath3 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                else
+                    this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[2] + '.png';
+
             }
             if (this.nowChar.length >= 4) {
                 this.imagePath4 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
             }
+        },
+        loadTwoChar() {
+            var c = '';
+            //'가'같은 케이스
+            if (this.nowChar.length === 2) {
+                c = this.word[this.nowIdx];
+            }
+            //'강'같은 케이스
+            else {
+                c = Hangul.assemble([this.nowChar[0], this.nowChar[1]]);
+            }
+ 
+            //'가'같은 케이스
+            if (this.isTwoChar(c)) {
+                this.imagePath1 = this.types[0] + '/' + this.types[3] + '/' + c + '.png';
+            }
+            //'게'같은 케이스
+            else {
+                this.imagePath1 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[0] + '.png';
+                this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
+            }
 
+        },
+        adjustImg() {
+            this.spandInitCharacter('imgContainer1');
+            this.spandInitCharacter('imgContainer2');
+            this.spandInitCharacter('imgContainer3');
+            this.spandInitCharacter('imgContainer4');
+            
+            if(this.imagePath2!=='./'){
+                //'꼬'
+                if(this.isUnmo(this.nowChar[1]))
+                    this.spandGaroCharater('imgContainer2');
+                //'게'
+                else
+                    this.spandSaroCharater('imgContainer2');
+            }
 
+            if (this.nowChar.length === 3) {
+                //'과'같은 케이스
+                if (this.isMo(this.nowChar[2])) {
+                    this.spandSaroCharater('imgContainer3');
+                }
+                //'강'같은 케이스
+                else {
+                    if(this.imagePath2==='./'){
+                        this.spandGaroCharater('imgContainer1');
+                    }
+                }
+            }
+            else if(this.nowChar.length===4){
+                //위가 '가,고' 인 경우
+                if(this.imagePath2==='./'){
+                    //'값'
+                    if(this.isJa(this.nowChar[2])){
+                        this.spandGaroCharater('imgContainer1');
+                        this.pressGaroCharacter('imgContainer3');
+                        this.pressGaroCharacter('imgContainer4');
+                    }
+                    //'광'
+                    else
+                        this.spandSaroCharater('imgContainer3');
+                }
+                //위가 '게,꼬'인 경우
+                else{
+                    //'겕'
+                    if(this.isJa(this.nowChar[2])){
+                        this.pressGaroCharacter('imgContainer3');
+                        this.pressGaroCharacter('imgContainer4');
+                    }
+                    //'꽝'
+                    else{
+                        console.log("in");
+                        this.swapImg('imgContainer2','imgContainer3');
+                        // this.pressSaroCharacter('imgContainer1');
+                        this.spandInitCharacter('imgContainer2');
+                        // this.pressSaroCharacter('imgContainer3');
+                    }
+                }
+            }
         },
         init() {
             this.imagePath1 = './';
@@ -111,21 +177,48 @@ export default {
             this.parsedChar = [];
             this.charType = '';
         },
-        spandGaroCharater(element) {
+        spandGaroCharater(id) {
+            let element = document.getElementById(id);
             element.style.width = "350px";
             element.style.height = "200px";
         },
-        spandSaroCharater(element) {
+        spandSaroCharater(id) {
+            let element = document.getElementById(id);
             element.style.width = "200px";
             element.style.height = "350px";
         },
-        spandInitCharacter(element) {
+        spandInitCharacter(id) {
+            let element = document.getElementById(id);
             element.style.width = "200px";
             element.style.height = "200px";
         },
+        pressGaroCharacter(id){
+            let element = document.getElementById(id);
+            element.style.width = "100px";
+            element.style.height = "200px";
+        },
+        pressSaroCharacter(id){
+            let element = document.getElementById(id);
+            element.style.width = "200px";
+            element.style.height = "100px";
+        },
         isUnmo(c) {
             return this.unmo.indexOf(c) !== -1;
-        }
+        },
+        isJa(c) {
+            return this.ja.indexOf(c) !== -1;
+        },
+        isMo(c) {
+            return this.mo.indexOf(c) !== -1;
+        },
+        isTwoChar(c){
+            return this.twoChar.indexOf(c) !== -1;
+        },
+        swapImg(){
+            let temp = this.imagePath2;
+            this.imagePath2 = this.imagePath3;
+            this.imagePath3 = temp;
+         }
     }
 }
 </script>
