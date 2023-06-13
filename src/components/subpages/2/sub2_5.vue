@@ -5,10 +5,20 @@
         </div>
         <div class="bottomContainer">
             <div class="charContiner" id="charContiner">
-                <img class="imgContainer1" id="imgContainer1" :src=imagePath1 v-show="imagePath1 !== './'">
-                <img class="imgContainer2" id="imgContainer2" :src=imagePath2 v-show="imagePath2 !== './'">
-                <img class="imgContainer3" id="imgContainer3" :src=imagePath3 v-show="imagePath3 !== './'">
-                <img class="imgContainer4" id="imgContainer4" :src=imagePath4 v-show="imagePath4 !== './'">
+                <div class="leftSpace">
+                    <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
+                    <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
+                </div>
+                <div class="rightSpace">
+                    <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
+                </div>
+                <div class="bottomSpace">
+                        <img class="img4" id="img4" :src=imagePath4 v-show="imagePath4 !== './'">
+                        <img class="img5" id="img5" :src=imagePath5 v-show="imagePath5 !== './'">
+                        <img class="img6" id="img6" :src=imagePath6 v-show="imagePath6 !== './'">
+                        <img class="img7" id="img7" :src=imagePath7 v-show="imagePath7 !== './'">
+                        <img class="img8" id="img8" :src=imagePath8 v-show="imagePath8 !== './'">
+                </div>
             </div>
         </div>
     </div>
@@ -31,16 +41,19 @@ export default {
             parsedChar: [],
             ja: [],
             mo: [],
-            twoChar: [],
             unmo: ['ㅗ', 'ㅛ', 'ㅜ', 'ㅠ', 'ㅡ'],
             nowIdx: 0,
-            imagePath1: './',
-            imagePath2: './',
-            imagePath3: './',
-            imagePath4: './',
+            imagePath1: './second/first/ㄱ.png',
+            imagePath2: './second/second/ㅗ.png',
+            imagePath3: './second/second/ㅏ.png',
+            imagePath4: './second/first/ㄱ.png',
+            imagePath5: './second/first/ㅇ.png',
+            imagePath6: './second/first/ㄱ.png',
+            imagePath7: './second/first/ㄱ.png',
+            imagePath8: './second/first/ㄱ.png',
             charType: '',
             word: '',
-            types: String('second_first_second_third').split('_'),
+            types: String('second_first_second').split('_'),
 
         }
     },
@@ -63,21 +76,22 @@ export default {
                     console.log(data);
                     this.ja = data[this.types[0] + ''][this.types[1] + ''];
                     this.mo = data[this.types[0] + ''][this.types[2] + ''];
-                    this.twoChar = data[this.types[0] + ''][this.types[3] + ''];
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
         },
         generateNowCharImg() {
-            this.loadImg();
-            this.adjustImg();
+            // this.loadImg();
+            // this.adjustImg();
         },
         loadImg() {
-            this.loadTwoChar();
+            // this.loadTwoChar();
+
+
 
             if (this.nowChar.length >= 3) {
-                if(this.isJa(this.nowChar[2]))
+                if (this.isJa(this.nowChar[2]))
                     this.imagePath3 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
                 else
                     this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[2] + '.png';
@@ -97,7 +111,7 @@ export default {
             else {
                 c = Hangul.assemble([this.nowChar[0], this.nowChar[1]]);
             }
- 
+
             //'가'같은 케이스
             if (this.isTwoChar(c)) {
                 this.imagePath1 = this.types[0] + '/' + this.types[3] + '/' + c + '.png';
@@ -110,59 +124,59 @@ export default {
 
         },
         adjustImg() {
-            this.spandInitCharacter('imgContainer1');
-            this.spandInitCharacter('imgContainer2');
-            this.spandInitCharacter('imgContainer3');
-            this.spandInitCharacter('imgContainer4');
-            
-            if(this.imagePath2!=='./'){
+            this.spandInitCharacter('img1');
+            this.spandInitCharacter('img2');
+            this.spandInitCharacter('img3');
+            this.spandInitCharacter('img4');
+
+            if (this.imagePath2 !== './') {
                 //'꼬'
-                if(this.isUnmo(this.nowChar[1]))
-                    this.spandGaroCharater('imgContainer2');
+                if (this.isUnmo(this.nowChar[1]))
+                    this.spandGaroCharater('img2');
                 //'게'
                 else
-                    this.spandSaroCharater('imgContainer2');
+                    this.spandSaroCharater('img2');
             }
 
             if (this.nowChar.length === 3) {
                 //'과'같은 케이스
                 if (this.isMo(this.nowChar[2])) {
-                    this.spandSaroCharater('imgContainer3');
+                    this.spandSaroCharater('img3');
                 }
                 //'강'같은 케이스
                 else {
-                    if(this.imagePath2==='./'){
-                        this.spandGaroCharater('imgContainer1');
+                    if (this.imagePath2 === './') {
+                        this.spandGaroCharater('img1');
                     }
                 }
             }
-            else if(this.nowChar.length===4){
+            else if (this.nowChar.length === 4) {
                 //위가 '가,고' 인 경우
-                if(this.imagePath2==='./'){
+                if (this.imagePath2 === './') {
                     //'값'
-                    if(this.isJa(this.nowChar[2])){
-                        this.spandGaroCharater('imgContainer1');
-                        this.pressGaroCharacter('imgContainer3');
-                        this.pressGaroCharacter('imgContainer4');
+                    if (this.isJa(this.nowChar[2])) {
+                        this.spandGaroCharater('img1');
+                        this.pressGaroCharacter('img3');
+                        this.pressGaroCharacter('img4');
                     }
                     //'광'
                     else
-                        this.spandSaroCharater('imgContainer3');
+                        this.spandSaroCharater('img3');
                 }
                 //위가 '게,꼬'인 경우
-                else{
+                else {
                     //'겕'
-                    if(this.isJa(this.nowChar[2])){
-                        this.pressGaroCharacter('imgContainer3');
-                        this.pressGaroCharacter('imgContainer4');
+                    if (this.isJa(this.nowChar[2])) {
+                        this.pressGaroCharacter('img3');
+                        this.pressGaroCharacter('img4');
                     }
                     //'꽝'
-                    else{
+                    else {
                         console.log("in");
-                        this.swapImg('imgContainer2','imgContainer3');
-                        // this.pressSaroCharacter('imgContainer1');
-                        this.spandInitCharacter('imgContainer2');
-                        // this.pressSaroCharacter('imgContainer3');
+                        this.swapImg('img2', 'img3');
+                        // this.pressSaroCharacter('img1');
+                        this.spandInitCharacter('img2');
+                        // this.pressSaroCharacter('img3');
                     }
                 }
             }
@@ -192,12 +206,12 @@ export default {
             element.style.width = "200px";
             element.style.height = "200px";
         },
-        pressGaroCharacter(id){
+        pressGaroCharacter(id) {
             let element = document.getElementById(id);
             element.style.width = "100px";
             element.style.height = "200px";
         },
-        pressSaroCharacter(id){
+        pressSaroCharacter(id) {
             let element = document.getElementById(id);
             element.style.width = "200px";
             element.style.height = "100px";
@@ -211,14 +225,14 @@ export default {
         isMo(c) {
             return this.mo.indexOf(c) !== -1;
         },
-        isTwoChar(c){
+        isTwoChar(c) {
             return this.twoChar.indexOf(c) !== -1;
         },
-        swapImg(){
+        swapImg() {
             let temp = this.imagePath2;
             this.imagePath2 = this.imagePath3;
             this.imagePath3 = temp;
-         }
+        }
     }
 }
 </script>
@@ -240,39 +254,103 @@ export default {
 .bottomContainer {
     position: relative;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
 }
 
 .charContiner {
     position: absolute;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
+    /* margin: auto; */
+    /* display: flex;
+    flex-flow: row wrap;*/
+    /* justify-content: center;
+    align-items: center; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: yellow;
 }
 
-.imgContainer1 {
+.leftSpace {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    background-color: red;
+}
+
+.rightSpace {
+    display: inline-block;
+    width: 100px;
+    height: 300px;
+    margin-bottom: 0;
+    background-color:white;
+}
+
+
+.bottomSpace {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background-color: gray;
+}
+
+
+
+.img1 {
+    margin-left: 50px;
     width: 200px;
     height: 200px;
 }
 
-.imgContainer2 {
+.img2 {
+    width: 300px;
+    height: 100px;
+}
+
+.img3 {
+    margin-bottom: 200px;
+    width: 100px;
+    height: 300px;
+}
+
+.img4 {
+    position: absolute;
+    margin-left: 50px;
     width: 200px;
+    height: 200px;
+    background-color: aqua;
+
+}
+
+.img5 {
+    position: absolute;
+    margin-left: 150px;
+    width: 200px;
+    height: 200px;
+    background-color: slateblue;
+
+}
+
+.img6 {
+    position: absolute;
+    margin-left: 50px;
+    width: 100px;
     height: 200px;
 }
 
-.imgContainer3 {
-    width: 200px;
+.img7 {
+    position: absolute;
+    margin-left: 150px;
+    width: 100px;
     height: 200px;
+    background-color: green;
 }
-
-.imgContainer4 {
-    width: 200px;
+.img8 {
+    position: absolute;
+    margin-left: 250px;
+    width: 100px;
     height: 200px;
+    background-color: burlywood;
 }
 </style>
   
