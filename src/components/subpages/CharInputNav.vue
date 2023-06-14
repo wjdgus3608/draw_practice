@@ -27,7 +27,7 @@ export default {
                 alert("한글만 입력가능 합니다.");
             }
             else
-            this.$emit('generateWord',this.inputWord.replace(/ /g, ''));
+                this.$emit('generateWord',this.inputWord.replace(/ /g, ''));
         }
     },
 
