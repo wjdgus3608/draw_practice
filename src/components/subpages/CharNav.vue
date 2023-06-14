@@ -28,7 +28,6 @@ export default {
             document.getElementById(this.nowChar).className+=' text-primary-emphasis';
         },
         handleClick(idx,clickedFile) {
-            console.log(this.nowChar);
             document.getElementById(this.nowChar).classList.remove('btn-primary');
             document.getElementById(this.nowChar).classList.remove('text-primary-emphasis');
 

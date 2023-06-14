@@ -244,9 +244,6 @@ export default {
                 this.generateNowCharImg();
             }
         },
-        handleFullScreenBtn() {
-
-        },
         handlePlusBtn() {
             if (this.scaleCnt < 10) {
                 this.scaleUpAllImg();
@@ -278,11 +275,7 @@ export default {
             var currentScale = scaleRegex.exec(element.style.transform);
             currentScale = currentScale ? parseFloat(currentScale[1]) : 1;
             element.style.transform = `translate(-50%, -50%) scale(${Number(currentScale) - Number(0.1)})`
-        },
-        handleImageError(){
-            // event.target.src='./white.png';
         }
-
     }
 }
 </script>
