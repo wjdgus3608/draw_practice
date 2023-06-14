@@ -8,7 +8,7 @@
                 <div class="leftSpace">
                     <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
                     <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
-                    <img class="img2" style="border: none;" v-show="imagePath2 === './'">
+                    <img class="empty" v-show="imagePath2 === './'">
                 </div>
                 <div class="rightSpace" v-show="imagePath3 !== './'">
                     <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
@@ -48,7 +48,8 @@
                 <div class="leftSpace">
                     <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
                     <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
-                    <img class="img2" style="border: none;" v-show="imagePath2 === './'">
+                    <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
+                    <img class="empty" v-show="imagePath2 === './'">
                 </div>
                 <div class="rightSpace" v-show="imagePath3 !== './'">
                     <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
@@ -277,6 +278,9 @@ export default {
             var currentScale = scaleRegex.exec(element.style.transform);
             currentScale = currentScale ? parseFloat(currentScale[1]) : 1;
             element.style.transform = `translate(-50%, -50%) scale(${Number(currentScale) - Number(0.1)})`
+        },
+        handleImageError(){
+            // event.target.src='./white.png';
         }
 
     }
@@ -365,6 +369,12 @@ export default {
     width: 300px;
     height: 100px;
 }
+
+.empty {
+    width: 300px;
+    background-color: white;
+}
+
 
 .img3 {
     margin-bottom: 200px;
