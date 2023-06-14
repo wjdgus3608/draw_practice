@@ -22,7 +22,12 @@ export default {
     methods: {
         clickSubmit(){
             event.preventDefault();
-            this.$emit('generateWord',this.inputWord);
+            var pattern = /[ㄱ-힣]/g;
+            if (!pattern.test(this.inputWord)) {
+                alert("한글만 입력가능 합니다.");
+            }
+            else
+            this.$emit('generateWord',this.inputWord.replace(/ /g, ''));
         }
     },
 
