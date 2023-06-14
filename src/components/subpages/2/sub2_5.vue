@@ -8,7 +8,7 @@
                 <div class="leftSpace">
                     <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
                     <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
-                    <img class="img2" style="border: none;" v-show="imagePath2 === './'" />
+                    <img class="img2" style="border: none;" v-show="imagePath2 === './'">
                 </div>
                 <div class="rightSpace" v-show="imagePath3 !== './'">
                     <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
@@ -28,7 +28,7 @@
                 <button type="button" class="btn btn-light" @click="handleMinusBtn">
                     <img src="/minus.png">
                 </button>
-                <button type="button" class="btn btn-light" @click="handleFullScreenBtn">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#mymodal">
                     <img src="/fullscreen.png">
                 </button>
             </div>
@@ -42,16 +42,39 @@
 
             </div>
         </div>
+        <PopupModal>
+            <template v-slot:default>
+                <div class="charContiner" id="charContiner">
+                <div class="leftSpace">
+                    <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
+                    <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
+                    <img class="img2" style="border: none;" v-show="imagePath2 === './'">
+                </div>
+                <div class="rightSpace" v-show="imagePath3 !== './'">
+                    <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
+                </div>
+                <div class="bottomSpace">
+                    <img class="img4" id="img4" :src=imagePath4 v-show="imagePath4 !== './'">
+                    <img class="img5" id="img5" :src=imagePath5 v-show="imagePath5 !== './'">
+                    <img class="img6" id="img6" :src=imagePath6 v-show="imagePath6 !== './'">
+                    <img class="img7" id="img7" :src=imagePath7 v-show="imagePath7 !== './'">
+                    <img class="img8" id="img8" :src=imagePath8 v-show="imagePath8 !== './'">
+                </div>
+            </div>
+            </template>
+        </PopupModal>
     </div>
 </template>
   
 <script>
 import CharInputNav from '../CharInputNav.vue';
+import PopupModal from '../../PopupModal.vue';
 import Hangul from 'hangul-js'
 export default {
     name: 'sub2_5',
     components: {
-        CharInputNav
+        CharInputNav,
+        PopupModal
     },
     created() {
         this.getFilesFromJson();
@@ -188,7 +211,7 @@ export default {
             this.imagePath7 = './';
             this.imagePath8 = './';
         },
-        initScale(){
+        initScale() {
             this.scaleCnt = 5;
             document.getElementById('charContiner').style.transform = `translate(-50%, -50%) scale(1.0)`
         },
@@ -224,13 +247,13 @@ export default {
 
         },
         handlePlusBtn() {
-            if(this.scaleCnt<10){
+            if (this.scaleCnt < 10) {
                 this.scaleUpAllImg();
                 this.scaleCnt++;
             }
         },
         handleMinusBtn() {
-            if(this.scaleCnt>0){
+            if (this.scaleCnt > 0) {
                 this.scaleDownAllImg();
                 this.scaleCnt--;
             }

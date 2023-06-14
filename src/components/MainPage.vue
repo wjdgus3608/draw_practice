@@ -25,7 +25,7 @@
         <sub3_4 v-if="menuNum === 12" />
       </div>
     </div>
-
+    
   </div>
 </template>
 
