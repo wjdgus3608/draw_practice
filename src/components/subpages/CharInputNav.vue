@@ -22,8 +22,8 @@ export default {
     methods: {
         clickSubmit(){
             event.preventDefault();
-            var pattern = /[ㄱ-힣]/g;
-            if (!pattern.test(this.inputWord)) {
+            let pattern = /([^ㄱ-ㅁ | ^가-힣 | ^ㅏ-ㅣ\x20])/i;
+            if (pattern.test(this.inputWord)) {
                 alert("한글만 입력가능 합니다.");
             }
             else

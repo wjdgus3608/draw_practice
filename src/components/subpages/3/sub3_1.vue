@@ -6,7 +6,7 @@
         <div class="bottomContainer">
             <img class="imgContainer" id="imgContainer" :src=imagePath>
             <button type="button" class="btn btn-link" id="detailBtn" data-bs-toggle="modal"
-                data-bs-target="#myDetailModal">+ 자세히 공부하기</button>
+                data-bs-target="#myDetailModal" v-show="isPresent(nowChar)">+ 자세히 공부하기</button>
             <div class="sideToolContainer">
                 <button type="button" class="btn btn-light" @click="handlePlusBtn">
                     <img src="/plus.png">
@@ -32,7 +32,6 @@
                     <img class="imgContainer2" :src=imagePath2>
                     <img class="imgContainer3" :src=imagePath3>
                 </div>
-
             </template>
         </DetailModal>
     </div>
@@ -58,6 +57,7 @@ export default {
             nowIdx: 0,
             types: String('third_first_detail_des').split('_'),
             fetchFiles: [],
+            detailFiles: [],
             imagePath: './',
             imagePath2: './',
             imagePath3: './',
@@ -78,6 +78,7 @@ export default {
                 .then(data => {
                     console.log(data);
                     this.fetchFiles = data[this.types[0] + ''][this.types[1] + ''];
+                    this.detailFiles = data[this.types[0]+''][this.types[2]+''];
                     this.nowChar = this.fetchFiles[0];
                     this.imagePath = this.types[0] + '/' + this.types[1] + '/' + this.nowChar + '.png';
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar + '.png';
@@ -119,6 +120,9 @@ export default {
             var currentScale = scaleRegex.exec(element.style.transform);
             currentScale = currentScale ? parseFloat(currentScale[1]) : 1;
             element.style.transform = `translate(-50%, -50%) scale(${Number(currentScale) - Number(0.1)})`
+        },
+        isPresent(c){
+            return this.detailFiles.indexOf(c)!==-1;
         }
     }
 }
