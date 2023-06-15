@@ -5,6 +5,8 @@
         </div>
         <div class="bottomContainer">
             <img class="imgContainer" id="imgContainer" :src=imagePath>
+            <button type="button" class="btn btn-link" id="detailBtn" data-bs-toggle="modal"
+                data-bs-target="#myDetailModal">+ 자세히 공부하기</button>
             <div class="sideToolContainer">
                 <button type="button" class="btn btn-light" @click="handlePlusBtn">
                     <img src="/plus.png">
@@ -23,17 +25,29 @@
                 <img class="imgContainer" :src=imagePath>
             </template>
         </PopupModal>
+
+        <DetailModal>
+            <template v-slot:default>
+                <div class="modalContainer">
+                    <img class="imgContainer2" :src=imagePath2>
+                    <img class="imgContainer3" :src=imagePath3>
+                </div>
+
+            </template>
+        </DetailModal>
     </div>
 </template>
   
 <script>
 import CharNav from '../CharNav.vue';
 import PopupModal from '@/components/PopupModal.vue';
+import DetailModal from '@/components/DetailModal.vue';
 export default {
     name: 'sub3_1',
     components: {
         CharNav,
-        PopupModal
+        PopupModal,
+        DetailModal
     },
     created() {
         this.getFilesFromJson()
@@ -42,9 +56,11 @@ export default {
         return {
             nowChar: '',
             nowIdx: 0,
-            types: String('third_first').split('_'),
+            types: String('third_first_detail_des').split('_'),
             fetchFiles: [],
             imagePath: './',
+            imagePath2: './',
+            imagePath3: './',
             scaleCnt: 5
         }
     },
@@ -53,6 +69,8 @@ export default {
             this.nowIdx = idx;
             this.nowChar = c;
             this.imagePath = this.types[0] + '/' + this.types[1] + '/' + c + '.png';
+            this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + c + '.png';
+            this.imagePath3 = this.types[0] + '/' + this.types[3] + '/' + c + '.png';
         },
         getFilesFromJson() {
             fetch('/file.json')
@@ -62,6 +80,8 @@ export default {
                     this.fetchFiles = data[this.types[0] + ''][this.types[1] + ''];
                     this.nowChar = this.fetchFiles[0];
                     this.imagePath = this.types[0] + '/' + this.types[1] + '/' + this.nowChar + '.png';
+                    this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar + '.png';
+                    this.imagePath3 = this.types[0] + '/' + this.types[3] + '/' + this.nowChar + '.png';
 
                 })
                 .catch(error => {
@@ -128,6 +148,32 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.imgContainer2 {
+    width: 500px;
+    height: 500px;
+}
+
+.imgContainer3 {
+    width: 100%;
+    height: 300px;
+}
+
+.modalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#detailBtn {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 300px;
+    height: 50px;
+    transform: translate(-10%, -50%);
 }
 
 .sideToolContainer {
