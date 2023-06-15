@@ -45,23 +45,22 @@
         <PopupModal>
             <template v-slot:default>
                 <div class="charContiner" id="charContiner">
-                <div class="leftSpace">
-                    <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
-                    <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
-                    <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
-                    <img class="empty" v-show="imagePath2 === './'">
+                    <div class="leftSpace">
+                        <img class="img1" id="img1" :src=imagePath1 v-show="imagePath1 !== './'">
+                        <img class="img2" id="img2" :src=imagePath2 v-show="imagePath2 !== './'">
+                        <img class="empty" v-show="imagePath2 === './'">
+                    </div>
+                    <div class="rightSpace" v-show="imagePath3 !== './'">
+                        <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
+                    </div>
+                    <div class="bottomSpace">
+                        <img class="img4" id="img4" :src=imagePath4 v-show="imagePath4 !== './'">
+                        <img class="img5" id="img5" :src=imagePath5 v-show="imagePath5 !== './'">
+                        <img class="img6" id="img6" :src=imagePath6 v-show="imagePath6 !== './'">
+                        <img class="img7" id="img7" :src=imagePath7 v-show="imagePath7 !== './'">
+                        <img class="img8" id="img8" :src=imagePath8 v-show="imagePath8 !== './'">
+                    </div>
                 </div>
-                <div class="rightSpace" v-show="imagePath3 !== './'">
-                    <img class="img3" id="img3" :src=imagePath3 v-show="imagePath3 !== './'">
-                </div>
-                <div class="bottomSpace">
-                    <img class="img4" id="img4" :src=imagePath4 v-show="imagePath4 !== './'">
-                    <img class="img5" id="img5" :src=imagePath5 v-show="imagePath5 !== './'">
-                    <img class="img6" id="img6" :src=imagePath6 v-show="imagePath6 !== './'">
-                    <img class="img7" id="img7" :src=imagePath7 v-show="imagePath7 !== './'">
-                    <img class="img8" id="img8" :src=imagePath8 v-show="imagePath8 !== './'">
-                </div>
-            </div>
             </template>
         </PopupModal>
     </div>
@@ -137,8 +136,9 @@ export default {
 
             if (this.nowChar.length === 2) {
                 //'구'
-                if (this.isUnmo(this.nowChar[1]))
+                if (this.isUnmo(this.nowChar[1])) {
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
+                }
                 //'가'
                 else
                     this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
@@ -148,12 +148,18 @@ export default {
                 //'강'
                 if (!this.isUnmo(this.nowChar[1]) && this.isJa(this.nowChar[2])) {
                     this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
-                    this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                    if (this.isJa(this.nowChar[2] + '3'))
+                        this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2]+ '3' + '.png';
+                    else
+                        this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
                 }
                 //'궁'
                 else if (this.isUnmo(this.nowChar[1]) && this.isJa(this.nowChar[2])) {
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
-                    this.imagePath4 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                    if (this.isJa(this.nowChar[2] + '3'))
+                        this.imagePath4 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2]+ '3' + '.png';
+                    else
+                        this.imagePath4 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
                 }
                 //'과'
                 else if (this.isUnmo(this.nowChar[1]) && !this.isJa(this.nowChar[2])) {
@@ -165,33 +171,59 @@ export default {
                 //'값'
                 if (!this.isUnmo(this.nowChar[1]) && this.isJa(this.nowChar[2]) && this.isJa(this.nowChar[3])) {
                     this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
-                    this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
-                    this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
+                    if (this.isJa(this.nowChar[2] + '3'))
+                        this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2]+ '3' + '.png';
+                    else
+                        this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                    if (this.isJa(this.nowChar[3] + '3'))
+                        this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3]+ '3' + '.png';
+                    else
+                        this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
                 }
                 //'흙'
                 else if (this.isUnmo(this.nowChar[1]) && this.isJa(this.nowChar[2]) && this.isJa(this.nowChar[3])) {
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
-                    this.imagePath6 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
-                    this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
+                    if (this.isJa(this.nowChar[2] + '3'))
+                        this.imagePath6 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2]+ '3' + '.png';
+                    else
+                        this.imagePath6 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[2] + '.png';
+                    if (this.isJa(this.nowChar[3] + '3'))
+                        this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3]+ '3' + '.png';
+                    else
+                        this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
                 }
                 //'광'
                 else if (this.isUnmo(this.nowChar[1]) && this.isMo(this.nowChar[2]) && this.isJa(this.nowChar[3])) {
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
                     this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[2] + '.png';
-                    this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
+                    if (this.isJa(this.nowChar[3] + '3'))
+                        this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3]+ '3' + '.png';
+                    else
+                        this.imagePath5 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
                 }
             }
             else if (this.nowChar.length === 5) {
                 //'뷁'
                 this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[1] + '.png';
                 this.imagePath3 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[2] + '.png';
-                this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
-                this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[4] + '.png';
+                if (this.isJa(this.nowChar[3] + '3'))
+                    this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3]+ '3' + '.png';
+                else
+                    this.imagePath7 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[3] + '.png';
+                if (this.isJa(this.nowChar[4] + '3'))
+                    this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[4]+ '3' + '.png';
+                else
+                    this.imagePath8 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[4] + '.png';
             }
         },
         setFirstChar() {
-            if (this.isJa(this.nowChar[0]))
-                this.imagePath1 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[0] + '.png';
+            if (this.isJa(this.nowChar[0])) {
+                if (this.isUnmo(this.nowChar[1]) && this.isJa(this.nowChar[0] + '2')) {
+                    this.imagePath1 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[0] + '2' + '.png';
+                }
+                else
+                    this.imagePath1 = this.types[0] + '/' + this.types[1] + '/' + this.nowChar[0] + '.png';
+            }
             else
                 this.imagePath1 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar[0] + '.png';
         },
