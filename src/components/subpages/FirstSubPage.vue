@@ -1,6 +1,6 @@
 <template>
     <div class="firstSubPage">
-       abc
+       <img src="/1. 초기화면.png" alt="">
     </div>
 </template>
   
@@ -15,7 +15,11 @@ export default {
     padding-top: 100px;
     width: 100%;
     height: 100%;
-    background-color: yellow;
+}
+
+img{
+    width: 100%;
+    height: 100%;
 }
 </style>
   

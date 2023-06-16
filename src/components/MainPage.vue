@@ -2,7 +2,7 @@
   <div class="mainPage">
     <div class="titleContainer" v-if="menuNum === 0">
       <div class="titleView">
-        <h3>옛 것을 통해 미래를 배우는, 온고지신-서(서)•에(Edu)학습</h3>
+        <h3 style="font-family: BMEULJIRO;">옛 것을 통해 미래를 배우는, 온고지신-서(서)•에(Edu)학습</h3>
       </div>
     </div>
     <div class="mainContainer">
@@ -106,13 +106,21 @@ h3 {
 }
 
 .sideContainer {
-  flex-grow: 1;
+  /* flex-grow: 0.5; */
+  width: 240px;
   display: flex;
   padding-top: 100px;
 }
 
 .contentsContainer {
-  flex-grow: 7;
+  flex-grow: 1;
   border-left: solid 1px gray;
+}
+
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 </style>
