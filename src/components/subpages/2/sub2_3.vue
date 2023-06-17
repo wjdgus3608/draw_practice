@@ -114,10 +114,11 @@ export default {
 }
 
 .topContainer {
-    position: relative;
+    display: flex;
     padding: 10px;
-    width: 300px;
-    /* width: 100%; */
+    justify-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .bottomContainer {

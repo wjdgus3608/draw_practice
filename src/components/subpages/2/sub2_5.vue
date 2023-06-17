@@ -290,8 +290,11 @@ export default {
 }
 
 .topContainer {
+    display: flex;
     padding: 10px;
-    width: 900px;
+    justify-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .bottomContainer {

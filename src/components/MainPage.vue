@@ -107,6 +107,7 @@ h3 {
 
 .sideContainer {
   flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
   padding-top: 100px;
 }

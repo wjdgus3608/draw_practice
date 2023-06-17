@@ -45,7 +45,7 @@ export default {
   
 <style scoped>
 .charNav {
-    width: 100%;
+    width: 70vw;
     overflow: scroll;
 }
 </style>
