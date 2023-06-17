@@ -114,8 +114,10 @@ export default {
 }
 
 .topContainer {
+    position: relative;
     padding: 10px;
-    width: 900px;
+    width: 300px;
+    /* width: 100%; */
 }
 
 .bottomContainer {
