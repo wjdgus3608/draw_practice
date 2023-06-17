@@ -69,7 +69,7 @@ export default {
 <style scoped>
 .sideBar {
     width: 100%;
-
+    overflow: scroll;
 }
 
 div{
