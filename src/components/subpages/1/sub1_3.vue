@@ -3,16 +3,16 @@
         <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="">
-                    <img src="/다.역입,중봉,삼절/슬라이드1.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드1.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/다.역입,중봉,삼절/슬라이드2.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드2.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/다.역입,중봉,삼절/슬라이드3.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드3.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/다.역입,중봉,삼절/슬라이드4.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드4.png" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -60,9 +60,6 @@ export default {
 
 .carousel {
     overflow: hidden;
-}
-.carousel-item {
-    display: none;
 }
 
 img {

@@ -7,6 +7,9 @@
             <img class="imgContainer" id="imgContainer" :src=imagePath>
             <button type="button" class="btn btn-link" id="detailBtn" data-bs-toggle="modal"
                 data-bs-target="#myDetailModal" v-show="isPresent(nowChar)">+ 자세히 공부하기</button>
+            <div id="detailDes">
+                {{ this.desFiles[this.nowChar] }}
+            </div>
             <div class="sideToolContainer">
                 <button type="button" class="btn btn-light" @click="handlePlusBtn">
                     <img src="/plus.png">
@@ -58,6 +61,7 @@ export default {
             types: String('third_first_detail_des').split('_'),
             fetchFiles: [],
             detailFiles: [],
+            desFiles:[],
             imagePath: './',
             imagePath2: './',
             imagePath3: './',
@@ -79,6 +83,8 @@ export default {
                     console.log(data);
                     this.fetchFiles = data[this.types[0] + ''][this.types[1] + ''];
                     this.detailFiles = data[this.types[0]+''][this.types[2]+''];
+                    this.desFiles = data[this.types[0]+'']['des'];
+                    console.log(this.desFiles);
                     this.nowChar = this.fetchFiles[0];
                     this.imagePath = this.types[0] + '/' + this.types[1] + '/' + this.nowChar + '.png';
                     this.imagePath2 = this.types[0] + '/' + this.types[2] + '/' + this.nowChar + '.png';
@@ -181,6 +187,16 @@ export default {
     width: 300px;
     height: 50px;
     transform: translate(-10%, -50%);
+}
+
+#detailDes {
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    width: 300px;
+    height: 20px;
+    transform: translate(-10%, -45%);
+    text-align: center;
 }
 
 .sideToolContainer {

@@ -3,28 +3,28 @@
         <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드15.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드15.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드16.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드16.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드17.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드17.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드18.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드18.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드19.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드19.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드20.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드20.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드21.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드21.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="">
-                    <img src="/가. 문방사우/슬라이드22.png" class="d-block w-100" alt="...">
+                    <img src="/슬라이드22.png" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -73,9 +73,6 @@ export default {
 
 .carousel {
     overflow: hidden;
-}
-.carousel-item {
-    display: none;
 }
 
 img {
